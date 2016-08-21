@@ -100,7 +100,54 @@ timeline.push(fixation);
 
 timeline.push(learningScreen);
 
+//variable to determine colour and array used for current trial
+
+/*
+var currentTrial = "wordColor" + "boolNegativePositive"
+
+//variable to determine color of cue to be shown
+
+var cue = {
+    type: 'single-stim'
+    stimulus: function() {
+
+//variable to determine probability of cue color drawn by var cue
+var cueRandomColor = Math.floor(Math.random() * 100);
+
+if var currentTrial = MIXED
+    choose randomly between .redCue and .blueCue
+     cueLabel = "random"
+
+if var currentTrial = RedFALSE OR BlueTRUE
+    if cueRandomColor <71 then display .blueCue
+    cueLabel = "posRel"
+
+    else if cueRandomColor > 90 choose randomly between .redCue and .blueCue
+    cueLabel = "random"
+
+    else display .redCue
+    cueLabel = "negRel"
+
+else (FOR EVERYTHING ELSE)
+    if cueRandomColor <71 then display .redCue
+    cueLabel = "posRel"
+
+    else if cueRandomColor > 90 choose randomly between .redCue and .blueCue
+    cueLabel = "random"
+
+    else display .blueCue
+    cueLabel = "negRel"
+    }
+is html: true
+};
+
+timeline.push(cue)
+
+I NEED BECKY TO DOUBLE-CHECK THIS LOGIC...
+*/
+
 //testing ability to recall previous random words
+
 var probe = {
     type: 'single-stim',
     stimulus: function() {
