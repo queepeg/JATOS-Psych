@@ -103,6 +103,7 @@ timeline.push(learningScreen);
 //variable to determine colour and array used for current trial
 if (typeof boolNegativePositive === "undefined"){
     var currentTrial = wordColor;
+    console.warn("boolNegativePositive is undefined!")
 } else {
     var currentTrial = wordColor + boolNegativePositive.toString();
 }
