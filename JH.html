@@ -115,17 +115,19 @@ var cue = {
 var cueRandomColor = Math.floor(Math.random() * 100);
 
 if var currentTrial = RedFALSE OR BlueTRUE
-    if random number <71 then display blue cue (label this PosRel)
-    else if > 90 choose randomly between red and blue cue (label random)
-    else display red cue (label NegRel)
+    if cueRandomColor <71 then display .blueCue (label this "PosRel" - short for Positive Relevant)
+    else if cueRandomColor > 90 choose randomly between .redCue and .blueCue (label "random")
+    else display .redCue (label "NegRel")
 
 else (FOR EVERYTHING ELSE)
-Create random number, if random number <71 then display red cue (label this PosRel)
-    else if > 90 choose randomly between red and blue cue (label random)
-    else display blue cue (label NegRel)
+    if cueRandomColor <71 then display .redCue (label this "PosRel")
+    else if cueRandomColor > 90 choose randomly between .redCue and .blueCue (label "random")
+    else display .blueCue (label "NegRel")
     }
 is html: true
 };
+
+timeline.push(cue)
 
 I NEED BECKY TO DOUBLE-CHECK THIS LOGIC...
 */
