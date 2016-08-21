@@ -101,10 +101,11 @@ timeline.push(fixation);
 timeline.push(learningScreen);
 
 //variable to determine colour and array used for current trial
-
-
-var currentTrial = wordColor + boolNegativePositive.toString();
-
+if (typeof boolNegativePositive === "undefined"){
+    var currentTrial = wordColor;
+} else {
+    var currentTrial = wordColor + boolNegativePositive.toString();
+}
 //variable to determine color of cue to be shown
 
 var cue = {
@@ -129,9 +130,6 @@ if (currentTrial = "Mixed"){
     if (cueRandomColor < 71) {
         var cueColor = "BlueCue";
         cueLabel = "posRel";
-    } else if (cueRandomColor > 90) {
-    // choose randomly between .redCue and .blueCue
-    cueLabel = "random";
     } else {
     // else display .redCue
     var cueColor = "RedCue";
