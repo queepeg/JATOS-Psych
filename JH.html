@@ -15,6 +15,7 @@
 
   /* create the experiment timeline */
   var timeline = [];
+  var wordColor;
 
   /* instructions */
   var instructions = {
@@ -75,10 +76,14 @@ timeline.push(fixation);
 	var intPos = Math.floor(Math.random() * 100);
 
     if (intPos < 21) {
+        wordColor = randomColor + 'Cue';
+
 	   return '<div class=' + randomColor + '><div class=topLeft>' + stimMArray[0] + '</div><div class=topMiddle>' + stimMArray[1] + '</div><div class=topRight>' + stimMArray[2] + '</div></div>' + '<div class=' + altColor + '><div class=bottomLeft>' + stimMArray[3] + '</div><div class=bottomMiddle>' + stimMArray[4] + '</div><div class=bottomRight>' + stimMArray[5] + '</div></div>';
     } else if (intPos > 60) {
+        wordColor = randomColor + 'Cue';
 	   return '<div class=' + randomColor + '><div class=topLeft>' + stimNArray[0] + '</div><div class=topMiddle>' + stimNArray[1] + '</div><div class=topRight>' + stimNArray[2] + '</div></div>' + '<div class=' + altColor + '><div class=bottomLeft>' + stimPArray[0] + '</div><div class=bottomMiddle>' + stimPArray[1] + '</div><div class=bottomRight>' + stimPArray[2] + '</div></div>';
 	} else {
+        wordColor = randomColor + 'Cue';
 	return '<div class=' + randomColor + '><div class=topLeft>' + stimPArray[0] + '</div><div class=topMiddle>' + stimPArray[1] + '</div><div class=topRight>' + stimPArray[2] + '</div></div>' + '<div class=' + altColor + '><div class=bottomLeft>' + stimNArray[0] + '</div><div class=bottomMiddle>' + stimNArray[1] + '</div><div class=bottomRight>' + stimNArray[2] + '</div></div>';
   } },
     is_html: true,
@@ -95,7 +100,7 @@ var probe = {
     type: 'single-stim',
     stimulus: function() {
 
-        return "<div>" + stimNArray[0] + "</div>";
+        return '<div class=' + wordColor + '>' + stimNArray[0] + wordColor + '</div>';
     },
     is_html: true
     };
