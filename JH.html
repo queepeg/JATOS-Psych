@@ -102,49 +102,70 @@ timeline.push(learningScreen);
 
 //variable to determine colour and array used for current trial
 
-/*
-var currentTrial = "wordColor" + "boolNegativePositive"
+
+var currentTrial = wordColor + boolNegativePositive.toString();
 
 //variable to determine color of cue to be shown
 
 var cue = {
-    type: 'single-stim'
+    type: 'single-stim',
     stimulus: function() {
 
 //variable to determine probability of cue color drawn by var cue
 var cueRandomColor = Math.floor(Math.random() * 100);
 
-if var currentTrial = MIXED
-    choose randomly between .redCue and .blueCue
-     cueLabel = "random"
+if (currentTrial = "Mixed"){
+    // choose randomly between .redCue and .blueCue
+    var intCueColor = Math.floor(Math.random() * 100);
 
-if var currentTrial = RedFALSE OR BlueTRUE
-    if cueRandomColor <71 then display .blueCue
-    cueLabel = "posRel"
-
-    else if cueRandomColor > 90 choose randomly between .redCue and .blueCue
-    cueLabel = "random"
-
-    else display .redCue
-    cueLabel = "negRel"
-
-else (FOR EVERYTHING ELSE)
-    if cueRandomColor <71 then display .redCue
-    cueLabel = "posRel"
-
-    else if cueRandomColor > 90 choose randomly between .redCue and .blueCue
-    cueLabel = "random"
-
-    else display .blueCue
-    cueLabel = "negRel"
+	if (intCueColor < 50) {
+		var cueColor = "RedCue";
+    } else {
+		var cueColor = "BlueCue";
     }
-is html: true
+
+    cueLabel = "random";
+} else if (currentTrial === "RedFalse" || "BlueTrue") {
+    if (cueRandomColor < 71) {
+        var cueColor = "BlueCue";
+        cueLabel = "posRel";
+    } else if (cueRandomColor > 90) {
+    // choose randomly between .redCue and .blueCue
+    cueLabel = "random";
+    } else {
+    // else display .redCue
+    var cueColor = "RedCue";
+    cueLabel = "negRel";
+    }
+} else {
+    // (FOR EVERYTHING ELSE)
+    if (cueRandomColor < 71) {
+    // then display .redCue
+    var cueColor = "RedCue";
+    cueLabel = "posRel";
+    } else if (cueRandomColor > 90) {
+    // choose randomly between .redCue and .blueCue
+        var intCueColor = Math.floor(Math.random() * 100);
+
+	   if (intCueColor < 50) {
+           var cueColor = "RedCue";
+       } else {
+		   var cueColor = "BlueCue";
+       }
+        cueLabel = "random";
+    } else {
+    // display .blueCue
+    var cueColor = "BlueCue";
+    cueLabel = "negRel";
+    }
+}
+// Return the result
+return "<div class=" + cueColor + "></div>";
+},
+is_html: true
 };
 
 timeline.push(cue)
-
-I NEED BECKY TO DOUBLE-CHECK THIS LOGIC...
-*/
 
 //testing ability to recall previous random words
 
