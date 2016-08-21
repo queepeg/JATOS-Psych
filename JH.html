@@ -20,27 +20,28 @@
   var instructions = {
     type: 'instructions',
     pages: ['<p>This is' +
-      ' a ' +
-      'MODIFIED STEINBERG! ' +
-      'MODIFIED STEINBERG!</p>' +
-      '<p style="font-weight:bold;">Press Y if the word BLUE</p>' +
-      '<p style="font-weight:bold;">Press N if the word is RED.</p>' +
-      '<p>Click the button below to begin.</p>'
+    ' a ' +
+    'MODIFIED STEINBERG! ' +
+    'MODIFIED STEINBERG!</p>' +
+    '<p style="font-weight:bold;">Press Y if the word BLUE</p>' +
+    '<p style="font-weight:bold;">Press N if the word is RED.</p>' +
+    '<p>Click the button below to begin.</p>'
     ],
     allow_keys: false,
     show_clickable_nav: true
-  }
+  };
 
   timeline.push(instructions);
 
 //present fixation cross for 500ms
 var fixation = {
-type: 'single-stim',
-stimulus: '/study_assets/MSJH/img/fixation.png',
-timing_post_trial: 0,
+    type: 'single-stim',
+    stimulus: '/study_assets/MSJH/img/fixation.png',
+    timing_post_trial: 0,
 	timing_stim: 500,
 	timing_response: 500,
-response_ends_trial: false}
+    response_ends_trial: false
+};
 
 
 timeline.push(fixation);
@@ -73,25 +74,21 @@ timeline.push(fixation);
 	//position code
 	var intPos = Math.floor(Math.random() * 100);
 
-	if (intPos < 21) {
-	return "<div class=" + randomColor + "><div class=topLeft>" + stimMArray[0] + "</div><div class=topMiddle>" + stimMArray[1] + "</div><div class=topRight>" + stimMArray[2] + "</div></div>" + "<div class=" + altColor + "><div class=bottomLeft>" + stimMArray[3] + "</div><div class=bottomMiddle>" + stimMArray[4] + "</div><div class=bottomRight>" + stimMArray[5] + "</div></div>";
-		   }
-	else if (intPos > 60) {
-	return	"<div class=" + randomColor + "><div class=topLeft>" + stimNArray[0] + "</div><div class=topMiddle>" + stimNArray[1] + "</div><div class=topRight>" + stimNArray[2] + "</div></div>" + "<div class=" + altColor + "><div class=bottomLeft>" + stimPArray[0] + "</div><div class=bottomMiddle>" + stimPArray[1] + "</div><div class=bottomRight>" + stimPArray[2] + "</div></div>";
-			}
-
-	else {
-	return "<div class=" + randomColor + "><div class=topLeft>" + stimPArray[0] + "</div><div class=topMiddle>" + stimPArray[1] + "</div><div class=topRight>" + stimPArray[2] + "</div></div>" + "<div class=" + altColor + "><div class=bottomLeft>" + stimNArray[0] + "</div><div class=bottomMiddle>" + stimNArray[1] + "</div><div class=bottomRight>" + stimNArray[2] + "</div></div>";
+    if (intPos < 21) {
+	   return '<div class=' + randomColor + '><div class=topLeft>' + stimMArray[0] + '</div><div class=topMiddle>' + stimMArray[1] + '</div><div class=topRight>' + stimMArray[2] + '</div></div>' + '<div class=' + altColor + '><div class=bottomLeft>' + stimMArray[3] + '</div><div class=bottomMiddle>' + stimMArray[4] + '</div><div class=bottomRight>' + stimMArray[5] + '</div></div>';
+    } else if (intPos > 60) {
+	   return '<div class=' + randomColor + '><div class=topLeft>' + stimNArray[0] + '</div><div class=topMiddle>' + stimNArray[1] + '</div><div class=topRight>' + stimNArray[2] + '</div></div>' + '<div class=' + altColor + '><div class=bottomLeft>' + stimPArray[0] + '</div><div class=bottomMiddle>' + stimPArray[1] + '</div><div class=bottomRight>' + stimPArray[2] + '</div></div>';
+	} else {
+	return '<div class=' + randomColor + '><div class=topLeft>' + stimPArray[0] + '</div><div class=topMiddle>' + stimPArray[1] + '</div><div class=topRight>' + stimPArray[2] + '</div></div>' + '<div class=' + altColor + '><div class=bottomLeft>' + stimNArray[0] + '</div><div class=bottomMiddle>' + stimNArray[1] + '</div><div class=bottomRight>' + stimNArray[2] + '</div></div>';
   } },
-  is_html: true,
-  timing_post_trial: 800,
+    is_html: true,
+    timing_post_trial: 800,
 	timing_stim: 7800,
 	timing_response: 7800,
-response_ends_trial: false}
+    response_ends_trial: false
+};
 
 timeline.push(learningScreen);
-
-
 
 //testing ability to recall previous random words
 var probe = {
@@ -101,7 +98,7 @@ var probe = {
         return "<div>" + stimNArray[0] + "</div>";
     },
     is_html: true
-    }
+    };
 
 timeline.push(probe);
 
