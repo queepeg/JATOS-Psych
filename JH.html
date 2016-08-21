@@ -141,16 +141,6 @@ if (currentTrial = "Mixed"){
     // then display .redCue
     var cueColor = "RedCue";
     cueLabel = "posRel";
-    } else if (cueRandomColor > 90) {
-    // choose randomly between .redCue and .blueCue
-        var intCueColor = Math.floor(Math.random() * 100);
-
-	   if (intCueColor < 50) {
-           var cueColor = "RedCue";
-       } else {
-		   var cueColor = "BlueCue";
-       }
-        cueLabel = "random";
     } else {
     // display .blueCue
     var cueColor = "BlueCue";
