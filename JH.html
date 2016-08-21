@@ -100,18 +100,38 @@ timeline.push(fixation);
 
 timeline.push(learningScreen);
 
-/* var cue =
+//variable to determine colour and array used for current trial
+
+/*
+var currentTrial = "wordColor" + "boolNegativePositive"
+
+//variable to determine color of cue to be shown
+
+var cue = {
+    type: 'single-stim'
+    stimulus: function() {
+
+//variable to determine probability of cue color drawn by var cue
+var cueRandomColor = Math.floor(Math.random() * 100);
+
 if var currentTrial = RedFALSE
-Create random number, if random number <71 then display blue cue (label this PosRel)
+    if random number <71 then display blue cue (label this PosRel)
     else if > 90 choose randomly between red and blue cue (label random)
     else display red cue (label NegRel)
 
 else if current trial = RedTRUE
 Create random number, if random number <71 then display red cue (label this PosRel)
     else if > 90 choose randomly between red and blue cue (label random)
-    else display blue cue (label NegRel)*/
+    else display blue cue (label NegRel)
+    }
+is html: true
+};
+
+I NEED BECKY TO DETERMINE WHAT HAPPENS FOR BLUE TRUE OR BLUE POS....
+*/
 
 //testing ability to recall previous random words
+
 var probe = {
     type: 'single-stim',
     stimulus: function() {
