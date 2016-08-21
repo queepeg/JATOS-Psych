@@ -16,7 +16,6 @@
   /* create the experiment timeline */
   var timeline = [];
   var wordColor;
-  var boolNegativePositive;
 
   /* instructions */
   var instructions = {
@@ -103,7 +102,7 @@ timeline.push(learningScreen);
 //variable to determine colour and array used for current trial
 if (typeof boolNegativePositive === "undefined"){
     currentTrial = wordColor;
-    // console.warn("boolNegativePositive is undefined!")
+    console.warn("boolNegativePositive is undefined!")
 } else {
     currentTrial = wordColor + boolNegativePositive.toString();
 }
