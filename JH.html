@@ -115,14 +115,24 @@ var cue = {
 var cueRandomColor = Math.floor(Math.random() * 100);
 
 if var currentTrial = RedFALSE OR BlueTRUE
-    if cueRandomColor <71 then display .blueCue (label this "PosRel" - short for Positive Relevant)
-    else if cueRandomColor > 90 choose randomly between .redCue and .blueCue (label "random")
-    else display .redCue (label "NegRel")
+    if cueRandomColor <71 then display .blueCue
+    cueLabel = "posRel"
+
+    else if cueRandomColor > 90 choose randomly between .redCue and .blueCue
+    cueLabel = "random"
+
+    else display .redCue
+    cueLabel = "negRel"
 
 else (FOR EVERYTHING ELSE)
-    if cueRandomColor <71 then display .redCue (label this "PosRel")
-    else if cueRandomColor > 90 choose randomly between .redCue and .blueCue (label "random")
-    else display .blueCue (label "NegRel")
+    if cueRandomColor <71 then display .redCue
+    cueLabel = "posRel"
+
+    else if cueRandomColor > 90 choose randomly between .redCue and .blueCue
+    cueLabel = "random"
+
+    else display .blueCue
+    cueLabel = "negRel"
     }
 is html: true
 };
