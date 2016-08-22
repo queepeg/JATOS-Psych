@@ -30,7 +30,23 @@ var completeTrial //this is to compare cue and probe and determine the corretc r
 
 if cueLabel = NegRel
     if probeCategory = OldNegativeWords
-        completeTrial = ""
+        completeTrial = "Relevant"
+
+    else if probeCategory = OldPositveWords
+        completeTrial = "Irrelevant"
+
+    else completeTrial = probeCategory
+
+if cueLabel = PosRel
+    if probeCategory = OldPositveWords
+        completeTrial = "Relevant"
+
+    else if probeCategory = OldNegativeWords
+        completeTrial = "Irrelevant"
+
+    else completeTrial = probeCategory
+
+else completeTrial = "nonCritical"
 
 }
 */
