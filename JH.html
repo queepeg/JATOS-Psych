@@ -23,7 +23,7 @@
     pages: ["<p>This is a MODIFIED STEINBERG! MODIFIED STEINBERG!</p>" +
     "<p style=" + "font-weight:bold;" + ">Press Y if the word BLUE</p>" +
     "<p style=" + "font-weight:bold;" + ">Press N if the word is RED.</p>" +
-    "<p>Click the button below to begin.</p>";
+    "<p>Click the button below to begin.</p>"
     ],
     allow_keys: false,
     show_clickable_nav: true
@@ -34,7 +34,7 @@
 //present fixation cross for 500ms
 var fixation = {
     type: 'single-stim',
-    stimulus: '/study_assets/MSJH/img/fixation.png',
+    stimulus: "/study_assets/MSJH/img/fixation.png",
     timing_post_trial: 0,
 	timing_stim: 500,
 	timing_response: 500,
@@ -73,19 +73,20 @@ timeline.push(fixation);
 	var intPos = Math.floor(Math.random() * 100);
 
     if (intPos < 21) {
-        wordColor = 'Mixed';
+        wordColor = "Mixed";
+        console.log("intPos=" + intPos.toString() + " wordColor=" + wordColor);
 
-	   var returnValue = "<div class=" + randomColor + "><div class=topLeft>" + stimMArray[0] + "</div><div class=topMiddle>" + stimMArray[1] + "</div><div class=topRight>" + stimMArray[2] + "</div></div>" + "<div class=" + altColor + "><div class=bottomLeft>" + stimMArray[3] + "</div><div class=bottomMiddle>" + stimMArray[4] + "</div><div class=bottomRight>" + stimMArray[5] + "</div></div>";
+        var returnValue = "<div class=" + randomColor + "><div class=topLeft>" + stimMArray[0] + "</div><div class=topMiddle>" + stimMArray[1] + "</div><div class=topRight>" + stimMArray[2] + "</div></div>" + "<div class=" + altColor + "><div class=bottomLeft>" + stimMArray[3] + "</div><div class=bottomMiddle>" + stimMArray[4] + "</div><div class=bottomRight>" + stimMArray[5] + "</div></div>";
     } else if (intPos > 60) {
         wordColor = randomColor;
         boolNegativePositive = false;
-        console.log("wordColor =" + wordColor + " boolNegativePositive=" + boolNegativePositive.toString());
+        console.log("intPos=" + intPos.toString() + " wordColor=" + wordColor + " boolNegativePositive=" + boolNegativePositive.toString());
 
 	   var returnValue = "<div class=" + randomColor + "><div class=topLeft>" + stimNArray[0] + "</div><div class=topMiddle>" + stimNArray[1] + "</div><div class=topRight>" + stimNArray[2] + "</div></div>" + "<div class=" + altColor + "><div class=bottomLeft>" + stimPArray[0] + "</div><div class=bottomMiddle>" + stimPArray[1] + "</div><div class=bottomRight>" + stimPArray[2] + "</div></div>";
 	} else {
         wordColor = randomColor;
         boolNegativePositive = true;
-        console.log("wordColor =" + wordColor + " boolNegativePositive=" + boolNegativePositive.toString());
+        console.log("intPos=" + intPos.toString() + " wordColor=" + wordColor + " boolNegativePositive=" + boolNegativePositive.toString());
 
 	   var returnValue = "<div class=" + randomColor + "><div class=topLeft>" + stimPArray[0] + "</div><div class=topMiddle>" + stimPArray[1] + "</div><div class=topRight>" + stimPArray[2] + "</div></div>" + "<div class=" + altColor + "><div class=bottomLeft>" + stimNArray[0] + "</div><div class=bottomMiddle>" + stimNArray[1] + "</div><div class=bottomRight>" + stimNArray[2] + "</div></div>";
   }
@@ -100,19 +101,19 @@ timeline.push(fixation);
 
 timeline.push(learningScreen);
 
-//variable to determine colour and array used for current trial
-if (typeof boolNegativePositive === "undefined"){
-    var currentTrial = wordColor;
-    console.log("boolNegativePositive is undefined!");
-} else {
-    var currentTrial = wordColor + boolNegativePositive.toString();
-    console.log("boolNegativePositive is " + boolNegativePositive.toString());
-}
-//variable to determine color of cue to be shown
-
 var cue = {
     type: 'single-stim',
     stimulus: function() {
+
+//variable to determine colour and array used for current trial
+if (typeof boolNegativePositive === "undefined"){
+    currentTrial = wordColor;
+    console.log("currentTrial=" + currentTrial + " boolNegativePositive is undefined!");
+} else {
+    currentTrial = wordColor + boolNegativePositive.toString();
+    console.log("currentTrial=" + currentTrial + " boolNegativePositive is " + boolNegativePositive.toString());
+}
+//variable to determine color of cue to be shown
 
 //variable to determine probability of cue color drawn by var cue
 var cueRandomColor = Math.floor(Math.random() * 100);
@@ -163,7 +164,7 @@ var probe = {
     type: 'single-stim',
     stimulus: function() {
 
-        return '<div class=' + wordColor + '>' + stimNArray[0] + wordColor + boolNegativePositive.toString() + '</div>';
+        return "<div class=" + wordColor + ">" + stimNArray[0] + wordColor + boolNegativePositive.toString() + "</div>";
     },
     is_html: true
     };
