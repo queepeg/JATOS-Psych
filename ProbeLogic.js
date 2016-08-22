@@ -18,15 +18,35 @@ var probeArray = [oldPositiveWords, oldNegativeWords, newPositiveWords, newNegat
 //lots of lovely IFs to determine which word to recall as the probe
 
 var probe = function() {
-if cueLabel = "random" then randomly choose a word from "oldMixedWords"
+if cueLabel = "random" then randomly DISPLAY a word from "oldMixedWords"
     probeCategory = random
 
-else randomly choose an array from "probeArray"
+else randomly choose an array from "probeArray" and randomly DISPLAY a word from the chosen array
     probeCategory = probe //this tells us which array was used
 
 //this means that the probe category can now be one of five options that we can track
 
+var completeTrial //this is to compare cue and probe and determine the corretc response from user
 
+if cueLabel = NegRel
+    if probeCategory = OldNegativeWords
+        completeTrial = "Relevant"
+
+    else if probeCategory = OldPositveWords
+        completeTrial = "Irrelevant"
+
+    else completeTrial = probeCategory
+
+if cueLabel = PosRel
+    if probeCategory = OldPositveWords
+        completeTrial = "Relevant"
+
+    else if probeCategory = OldNegativeWords
+        completeTrial = "Irrelevant"
+
+    else completeTrial = probeCategory
+
+else completeTrial = "nonCritical"
 
 }
 */
