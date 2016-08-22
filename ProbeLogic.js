@@ -12,18 +12,19 @@ var newNegativeWords ["melon", "kiwi", "cherry", "dragonfruit", "pomegranette"]
 var probeCategory
 
 //Two arrays of arrays to use in var probe
-var mixedProbeArray = [oldMixedWords, newPositiveWords, newNegativeWords]
-var valancedProbeArray = [oldPositiveWords, oldNegativeWords, newPositiveWords, newNegativeWords]
+
+var probeArray = [oldPositiveWords, oldNegativeWords, newPositiveWords, newNegativeWords]
 
 //lots of lovely IFs to determine which word to recall as the probe
 
 var probe = function() {
-if cueLabel = "random" then randomly choose from "mixedProbeArray" (record choice in datafile) and then display a word randomly from the chosen array
-probeCategory = random
+if cueLabel = "random" then randomly choose a word from "oldMixedWords"
+    probeCategory = random
 
+else randomly choose an array from "probeArray"
+    probeCategory = probe //this tells us which array was used
 
-else randomly choose from "valancedProbeArray" and then choose a word randomly from the chosen array to display
-
+//this means that the probe category can now be one of five options that we can track
 
 
 
