@@ -15,15 +15,15 @@ var probeCategory
 var mixedProbeArray = [oldMixedWords, newPositiveWords, newNegativeWords]
 var valancedProbeArray = [oldPositiveWords, oldNegativeWords, newPositiveWords, newNegativeWords]
 
-//lots of lovely IFs
+//lots of lovely IFs to determine which word to recall as the probe
 
 var probe = function() {
-if cueLabel = "random" then randomly choose from mixedProbeArray (record choice in datafile) and then choose a word randomly from the chosen array to display
+if cueLabel = "random" then randomly choose from "mixedProbeArray" (record choice in datafile) and then display a word randomly from the chosen array
 probeCategory = random
 
 
-else randomly choose from valancedProbeArray and then choose a word randomly from the chosen array to display
-if
+else randomly choose from "valancedProbeArray" and then choose a word randomly from the chosen array to display
+
 
 
 
