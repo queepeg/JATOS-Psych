@@ -123,30 +123,30 @@ if (currentTrial === "Mixed"){
     var intCueColor = Math.floor(Math.random() * 100);
 
 	if (intCueColor < 50) {
-		var cueColor = "RedCue";
+		cueColor = "RedCue";
     } else {
-		var cueColor = "BlueCue";
+		cueColor = "BlueCue";
     }
 
     cueLabel = "random";
 } else if (currentTrial === "Redfalse" || "Bluetrue") {
     if (cueRandomColor < 71) {
-        var cueColor = "BlueCue";
+        cueColor = "BlueCue";
         cueLabel = "posRel";
     } else {
     // else display .redCue
-    var cueColor = "RedCue";
+    cueColor = "RedCue";
     cueLabel = "negRel";
     }
 } else {
     // (FOR EVERYTHING ELSE)
     if (cueRandomColor < 71) {
     // then display .redCue
-    var cueColor = "RedCue";
+    cueColor = "RedCue";
     cueLabel = "posRel";
     } else {
     // display .blueCue
-    var cueColor = "BlueCue";
+    cueColor = "BlueCue";
     cueLabel = "negRel";
     }
 }
