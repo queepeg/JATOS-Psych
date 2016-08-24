@@ -1,0 +1,37 @@
+Entry box for participant ID "Please enter your participant ID"
+Update General instruction Screen
+
+Practice instructions screen: "Let's begin with some practice trials"
+Display 5 x Trial
+
+Test trials instruction screen: "Now let's begin...the horror"
+Title Screen: Round 1 for 1000ms
+Display 40 x Trial
+
+Title Screen: Round 2 for 1000ms
+Display 40 x Trial
+
+Title Screen: Round 3 for 1000ms
+Display 40 x Trial
+
+Completion Screen: "Thankyou for completing today's training" for 3000ms
+
+End and Save Results
+
+Results we need to record:
+- Date (should already be on results file)
+- Participant ID
+- Trial number
+- var completeTrial 
+- var correctResponse
+- User's actual response (Y or N)
+- Reaction Time between probe and keystroke
+
+
+THINGS WE CAN STEAL
+
+This might be useful for timeline array: http://docs.jspsych.org/tutorials/rt-task/
+
+VERY USEFUL for timeline logic and trial tracking:
+https://github.com/expfactory/expfactory-experiments/blob/master/directed_forgetting/experiment.js
+
