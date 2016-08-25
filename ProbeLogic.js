@@ -1,6 +1,6 @@
 
 
-/*We need five arrays made up of words that have been displayed on the learning screen for this trial:*/
+/*We need five arrays made up of words that have been displayed on the learning screen for this trial:
 
 Var oldPositiveWords ["stimPArray[0]","stimPArray[1]","stimPArray[2]"
 Var oldNegativeWords ["stimNArray[0]","stimNArray[1]","stimNArray[2]"
