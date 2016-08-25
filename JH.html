@@ -158,11 +158,51 @@ is_html: true
 
 timeline.push(cue)
 
-//testing ability to recall previous random words
+/* Start of ProbeLogic.js code */
 
 var probe = {
     type: 'single-stim',
     stimulus: function() {
+
+        // These need to be inside the probe function or they will get triggered to early.
+        oldPositiveWords = [];
+        oldNegativeWords = [];
+        oldMixedWords = [];
+        newPositiveWords = [];
+        newNegativeWords = [];
+        probeArray = [];
+        var probeCategory;
+        var completeTrial;
+
+        if (cueLabel === "random"){
+
+            var word = jsPsych.randomization.sample(oldMixedWords, 1, false);
+            probeCategory = "random";
+            var answer = word[0];
+        } else {
+            var word = jsPsych.randomization.sample(probeArray, 1, false);
+            probeCategory = "probe";
+        }
+
+        if (cueLabel === "NegRel"){
+            if (probeCategory === "OldNegativeWords"){
+                completeTrial = "Relevant";
+            } else if (probeCategory === "OldPositiveWords") {
+                completeTrial = "Irrelevant";
+            } else {
+                completeTrial = probeCategory;
+            }
+        } else if (cueLabel === "PosRel"){
+            if (probeCategory === "OldPositiveWords"){
+                completeTrial = "Relevant";
+            } else if (probeCategory === "OldNegativeWords") {
+                completeTrial = "Irrelevant";
+            } else {
+                completeTrial = probeCategory;
+            }
+        } else {
+            completeTrial = "nonCritical";
+        }
 
         return "<div></div>";
     },
@@ -171,7 +211,7 @@ var probe = {
 
 timeline.push(probe);
 
-/*Defining desired logic behind Var Probe.... please see probelogic.js*/
+/* End of ProbeLogic.js code */
 
 jatos.onLoad(function() {
     jsPsych.init({
