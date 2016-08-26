@@ -1,3 +1,10 @@
+Populate probe arrays
+
+After cue is shown, have a slight delay and present probe inside the cue rectangle.....
+
+
+************ORDER OF TRIAL EVENTS***************
+
 Entry box for participant ID "Please enter your participant ID"
 Update General instruction Screen
 
@@ -17,6 +24,8 @@ Display 40 x Trial
 Completion Screen: "Thankyou for completing today's training" for 3000ms
 
 End and Save Results
+
+************ORDER OF TRIAL EVENTS***************
 
 Results we need to record:
 - Date (should already be on results file)
