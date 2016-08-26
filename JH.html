@@ -165,11 +165,11 @@ var probe = {
     stimulus: function() {
 
         // These need to be inside the probe function or they will get triggered to early.
-        oldPositiveWords = [];
-        oldNegativeWords = [];
-        oldMixedWords = [];
-        newPositiveWords = [];
-        newNegativeWords = [];
+        oldPositiveWords = [" + stimPArray[0] + "];
+        oldNegativeWords = [" + stimNArray[0] + "];
+        oldMixedWords = [" + stimMArray[0] + "];
+        newPositiveWords = ["fantastic", "awesome", "way to go"];
+        newNegativeWords = ["ass","smeghead","dickwad"];
         probeArray = [];
         var probeCategory;
         var completeTrial;
