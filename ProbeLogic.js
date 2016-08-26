@@ -26,25 +26,33 @@ else randomly choose an array from "probeArray" and randomly DISPLAY a word from
 
 //this means that the probe category can now be one of five options that we can track
 
-var completeTrial //this is to compare cue and probe and determine the corretc response from user
+var completeTrial //this is to compare cue and probe and determine the correct response from user
+
+var correctResponse
 
 if cueLabel = NegRel
     if probeCategory = OldNegativeWords
         completeTrial = "Relevant"
+        correctResponse = "Y"
 
     else if probeCategory = OldPositveWords
         completeTrial = "Irrelevant"
+        correctResponse = "N"
 
     else completeTrial = probeCategory
+        correctResponse = "N"
 
 if cueLabel = PosRel
     if probeCategory = OldPositveWords
         completeTrial = "Relevant"
+        correctResponse = "Y"
 
     else if probeCategory = OldNegativeWords
         completeTrial = "Irrelevant"
+        correctResponse = "N"
 
     else completeTrial = probeCategory
+        correctResponse = "N"
 
 else completeTrial = "nonCritical"
 
