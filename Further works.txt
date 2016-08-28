@@ -6,12 +6,11 @@ After cue is shown, have a slight delay and present probe inside the cue rectang
 ************ORDER OF TRIAL EVENTS***************
 
 Entry box for participant ID "Please enter your participant ID"
-Update General instruction Screen
 
-Practice instructions screen: "Let's begin with some practice trials"
-Display 5 x Trial
+instructions screen: 
+Trial x5
 
-Test trials instruction screen: "Now let's begin...the horror"
+End practice screen
 Title Screen: Round 1 for 1000ms
 Display 40 x Trial
 
@@ -21,9 +20,7 @@ Display 40 x Trial
 Title Screen: Round 3 for 1000ms
 Display 40 x Trial
 
-Completion Screen: "Thankyou for completing today's training" for 3000ms
-
-End and Save Results
+Completion Screen for 3000ms
 
 ************ORDER OF TRIAL EVENTS***************
 
