@@ -179,12 +179,12 @@ var probe = {
     stimulus: function() {
 
         // These need to be inside the probe function or they will get triggered to early.
-        oldPositiveWords = [stimPArray[0], stimPArray[1], ;
-        oldNegativeWords = [" + stimNArray[0] + "];
-        oldMixedWords = [" + stimMArray[0] + "];
+        oldPositiveWords = [stimPArray[0], stimPArray[1], stimPArray[2]];
+        oldNegativeWords = [stimNArray[0], stimNArray[1], stimNArray[2]];
+        oldMixedWords = [stimMArray[0], stimMArray[1], stimMArray[2], stimMArray[3], stimMArray[4], stimMArray[5]];
         newPositiveWords = ["fantastic", "awesome", "way to go"];
         newNegativeWords = ["poor","unhappy","sad"];
-        probeArray = [];
+        probeArray = [oldPositiveWords, oldNegativeWords, newPositiveWords, newNegativeWords];
         var probeCategory;
         var completeTrial;
 
@@ -196,6 +196,7 @@ var probe = {
         } else {
             var word = jsPsych.randomization.sample(probeArray, 1, false);
             probeCategory = "probe";
+            var answer = word[0];
         }
 
         if (cueLabel === "NegRel"){
@@ -218,7 +219,7 @@ var probe = {
             completeTrial = "nonCritical";
         }
 
-        return "<div></div>";
+        return "<div>" + answer + "</div>";
     },
     is_html: true
     };
