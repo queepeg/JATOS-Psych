@@ -184,7 +184,7 @@ var probe = {
         oldMixedWords = [stimMArray[0], stimMArray[1], stimMArray[2], stimMArray[3], stimMArray[4], stimMArray[5]];
         newPositiveWords = ["fantastic", "awesome", "way to go"];
         newNegativeWords = ["poor","unhappy","sad"];
-        probeArray = [oldPositiveWords, oldNegativeWords, newPositiveWords, newNegativeWords];
+        probeArray = ["oldPositiveWords", "oldNegativeWords", "newPositiveWords", "newNegativeWords"];
         var probeCategory;
         var completeTrial;
 
@@ -194,8 +194,9 @@ var probe = {
             probeCategory = "random";
             var answer = word[0];
         } else {
-            var word = jsPsych.randomization.sample(probeArray, 1, false);
-            probeCategory = "probe";
+            probeCategory = jsPsych.randomization.sample(probeArray, 1, false);
+
+            var word = jsPsych.randomization.sample(probeCategory, 1, false);
             var answer = word[0];
         }
 
