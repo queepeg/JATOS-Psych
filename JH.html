@@ -32,12 +32,12 @@
       timeline.push(instructions);
 
     /* instructions repeated at end of practice round*/
-  var startTrial = {
-    type: 'startTrial',
-    pages: ["<p>As with the practice round, you will be presented with three red words and three blue words.  You will then see a red or blue box.</p>" +
+  var endPractice = {
+    type: 'endPractice',
+    pages: ["<p>You have completed the practice rounds.  You will be presented with three red words and three blue words.  You will then see a red or blue box.</p> +
     "<p style=" + "font-weight:bold;" + ">Press Y if the word was shown on the previous screen</p>" +
     "<p style=" + "font-weight:bold;" + ">Press N if the word was NOT shown on the previous screen</p>" +
-    "<p>Click the button below to begin Round 1</p>"
+    "<p>Click the button below to begin</p>"
     ],
     allow_keys: false,
     show_clickable_nav: true
@@ -226,6 +226,14 @@ timeline.push(probe);
 
 /* End of ProbeLogic.js code */
 
+/* round 1 title text */
+var round1 = {
+    type: 'round1',
+    pages: ["<p>Round 1</p>"
+    ],
+    allow_keys: false,
+    show_clickable_nav: false
+  };
 
 /* round 2 title text */
 var round2 = {
