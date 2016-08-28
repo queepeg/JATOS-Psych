@@ -195,9 +195,21 @@ var probe = {
             var answer = word[0];
         } else {
             probeCategory = jsPsych.randomization.sample(probeArray, 1, false);
+            console.log("probeCategory =" + probeCategory);
 
-            var word = jsPsych.randomization.sample(probeCategory, 1, false);
-            var answer = word[0];
+            if (probeCategory === "oldPositiveWords") {
+                var word = jsPsych.randomization.sample(oldPositiveWords, 1, false);
+                var answer = word[0];
+            } else if (probeCategory === "oldNegativeWords") {
+                var word = jsPsych.randomization.sample(oldNegativeWords, 1, false);
+                var answer = word[0];
+            } else if (probeCategory === "newPositiveWords") {
+                var word = jsPsych.randomization.sample(newPositiveWords, 1, false);
+                var answer = word[0];
+            } else if (probeCategory === "newNegativeWords"){
+                var word = jsPsych.randomization.sample(newNegativeWords, 1, false);
+                var answer = word[0];
+            }
         }
 
         if (cueLabel === "NegRel"){
@@ -220,6 +232,7 @@ var probe = {
             completeTrial = "nonCritical";
         }
 
+        console.log("completeTrial =" + completeTrial);
         return "<div>" + answer + "</div>";
     },
     is_html: true
