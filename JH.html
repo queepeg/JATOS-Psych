@@ -194,8 +194,9 @@ var probe = {
             probeCategory = "random";
             var answer = word[0];
         } else {
-            var word = jsPsych.randomization.sample(probeArray, 1, false);
-            probeCategory = "probe";
+            probeCategory = jsPsych.randomization.sample(probeArray, 1, false);
+
+            var word = jsPsych.randomization.sample(probeCategory, 1, false);
             var answer = word[0];
         }
 
