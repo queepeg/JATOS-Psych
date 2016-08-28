@@ -190,25 +190,25 @@ var probe = {
 
         if (cueLabel === "random"){
 
-            var word = jsPsych.randomization.sample(oldMixedWords, 1, false);
+            word = jsPsych.randomization.sample(oldMixedWords, 1, false);
             probeCategory = "random";
-            var answer = word[0];
+            answer = word[0];
         } else {
             probeCategory = jsPsych.randomization.sample(probeArray, 1, false);
             console.log("probeCategory =" + probeCategory);
 
             if (probeCategory === "oldPositiveWords") {
-                var word = jsPsych.randomization.sample(oldPositiveWords, 1, false);
-                var answer = word[0];
+                word = jsPsych.randomization.sample(oldPositiveWords, 1, false);
+                answer = word[0];
             } else if (probeCategory === "oldNegativeWords") {
-                var word = jsPsych.randomization.sample(oldNegativeWords, 1, false);
-                var answer = word[0];
+                word = jsPsych.randomization.sample(oldNegativeWords, 1, false);
+                answer = word[0];
             } else if (probeCategory === "newPositiveWords") {
-                var word = jsPsych.randomization.sample(newPositiveWords, 1, false);
-                var answer = word[0];
+                word = jsPsych.randomization.sample(newPositiveWords, 1, false);
+                answer = word[0];
             } else if (probeCategory === "newNegativeWords"){
-                var word = jsPsych.randomization.sample(newNegativeWords, 1, false);
-                var answer = word[0];
+                word = jsPsych.randomization.sample(newNegativeWords, 1, false);
+                answer = word[0];
             }
         }
 
@@ -233,6 +233,8 @@ var probe = {
         }
 
         console.log("completeTrial =" + completeTrial);
+        console.log("word=" + word[0]);
+        console.log("answer=" + answer);
         return "<div>" + answer + "</div>";
     },
     is_html: true
