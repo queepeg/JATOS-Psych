@@ -108,8 +108,8 @@ timeline.push(fixation);
     },
     is_html: true,
     timing_post_trial: 800,
-	timing_stim: 7800,
-	timing_response: 7800,
+	timing_stim: 1000,
+	timing_response: 1000,
     response_ends_trial: false
 };
 
@@ -194,7 +194,35 @@ var probe = {
             probeCategory = "random";
             answer = word[0];
         } else {
-            probeCategory = jsPsych.randomization.sample(probeArray, 1, false);
+            var intProbe = Math.floor(Math.random()*100);
+
+            if (intProbe < 26) {
+                word = jsPsych.randomization.sample(oldPositiveWords, 1, false);
+            probeCategory = "oldPositiveWords";
+            answer = word[0];
+
+            } else if (intProbe > 25 && intProbe < 51) {
+                word = jsPsych.randomization.sample(oldNegativeWords, 1, false);
+            probeCategory = "oldNegativeWords";
+            answer = word[0];
+
+            } else if (intProbe > 76) {
+                word = jsPsych.randomization.sample(newNegativeWords, 1, false);
+            probeCategory = "newNegativeWords";
+            answer = word[0];
+
+            }
+
+            else {  word = jsPsych.randomization.sample(newPositiveWords, 1, false);
+            probeCategory = "newPositiveWords";
+            answer = word[0];
+                 }
+            console.log("probeCategory =" + probeCategory);
+            }
+
+
+
+          /*  probeCategory = jsPsych.randomization.sample(probeArray, 1, false);
             console.log("probeCategory =" + probeCategory);
 
             if (probeCategory === "oldPositiveWords") {
@@ -206,24 +234,24 @@ var probe = {
             } else if (probeCategory === "newPositiveWords") {
                 word = jsPsych.randomization.sample(newPositiveWords, 1, false);
                 answer = word[0];
-            } else if (probeCategory === "newNegativeWords"){
+            } else {
                 word = jsPsych.randomization.sample(newNegativeWords, 1, false);
                 answer = word[0];
-            }
-        }
+            }*/
 
-        if (cueLabel === "NegRel"){
-            if (probeCategory === "OldNegativeWords"){
+
+        if (cueLabel === "negRel"){
+            if (probeCategory === "oldNegativeWords"){
                 completeTrial = "Relevant";
-            } else if (probeCategory === "OldPositiveWords") {
+            } else if (probeCategory === "oldPositiveWords") {
                 completeTrial = "Irrelevant";
             } else {
                 completeTrial = probeCategory;
             }
-        } else if (cueLabel === "PosRel"){
-            if (probeCategory === "OldPositiveWords"){
+        } else if (cueLabel === "posRel"){
+            if (probeCategory === "oldPositiveWords"){
                 completeTrial = "Relevant";
-            } else if (probeCategory === "OldNegativeWords") {
+            } else if (probeCategory === "oldNegativeWords") {
                 completeTrial = "Irrelevant";
             } else {
                 completeTrial = probeCategory;
