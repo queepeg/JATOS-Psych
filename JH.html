@@ -45,14 +45,6 @@ var survey_pNo = {
 
 //practice rounds
 var exp_stage = 'practice';
-var practiceLength = 6;
-
-for (i = 0; i < (practiceLength-1); i++) {
-	timeline.push(fixation);
-	timeline.push(learningScreen);
-	timeline.push(cue);
-	timeline.push(probe);
-}
 
 //present fixation cross for 500ms
     var fixation = {
@@ -195,7 +187,7 @@ var probe = {
         var probeCategory;
         var completeTrial;
         var current_trial = 0;
-        var correct;
+        var correct_response;
 
         if (cueLabel === "random"){
 
@@ -258,8 +250,7 @@ var probe = {
                 correct_response = 78;
             } else {
                 completeTrial = probeCategory,
-                correct_response = 78;
-            }
+                correct_response = 78};
         } else if (cueLabel === "posRel"){
             if (probeCategory === "oldPositiveWords"){
                 completeTrial = "Relevant",
@@ -272,36 +263,36 @@ var probe = {
                 correct_response = 78;
             }
         } else {
-            completeTrial = "nonCritical";
+            completeTrial = "nonCritical",
+                correct_response = [89,78];
         }
 
-    current_trial = current_trial + 1
+        //trying to record what correct response was for each trial
+       jsPsych.data.addDataToLastTrial({correct_response: correct_response});
+
+        current_trial = current_trial + 1
 
         console.log("completeTrial =" + completeTrial);
         console.log("word=" + word[0]);
         console.log("answer=" + answer);
+        console.log("correct_response=" + correct_response);
         return "<div class=" + cueColor + ">" + answer + "</div>";
 },
 is_html: true,
-choices: [89,78],
-on_finish: function(trial_data){
-if (trial_data.key_press === correct_response) {
-    correct = "true";
-} else {
-    correct = "false";
-    }
-jsPsych.data.addDataToLastTrial({
-		correct: correct,
-		probe_shown: answer,
-		probe_type: probeCategory,
-        trial_type: completeTrial,
-		trial_num: current_trial,
-		correct_response: correct,
-		exp_stage: exp_stage
-     })
+choices: [89,78]
 }
 
+
 /* End of ProbeLogic.js code */
+
+var practiceLength = 6;
+
+for (i = 0; i < (practiceLength-1); i++) {
+	timeline.push(fixation);
+	timeline.push(learningScreen);
+	timeline.push(cue);
+	timeline.push(probe);
+}
 
     /* instructions repeated at end of practice round*/
 
