@@ -5,8 +5,6 @@ After cue is shown, have a slight delay and present probe inside the cue rectang
 
 ************ORDER OF TRIAL EVENTS***************
 
-Entry box for participant ID "Please enter your participant ID"
-
 instructions screen: 
 Trial x5
 

@@ -7,6 +7,7 @@
       <script src="/study_assets/MSJH/jspsych-5.0.3/jspsych.js"></script>
 	  <script src="/study_assets/MSJH/jspsych-5.0.3/plugins/jspsych-text.js"></script>
       <script src="/study_assets/MSJH/jspsych-5.0.3/plugins/jspsych-instructions.js"></script>
+      <script src="/study_assets/MSJH/jspsych-5.0.3/plugins/jspsych-survey-text.js"></script>
 	  <script src="/study_assets/MSJH/jspsych-5.0.3/plugins/jspsych-single-stim.js"></script>
 	  <link href="/study_assets/MSJH/jspsych-5.0.3/css/jspsych.css" rel="stylesheet" type="text/css"></link>
   </head>
@@ -17,13 +18,24 @@
   var timeline = [];
   var wordColor;
 
+// enter participant number
+var survey_pNo = {
+  type: 'survey-text',
+  questions: ["Welcome to today's training! Please enter your participant number"],
+};
+
+      timeline.push(survey_pNo);
+
   /* instructions and practice text */
   var instructions = {
     type: 'instructions',
-    pages: ["<p>You will be presented with three red words and three blue words.  You will then see a red or blue box.</p>" +
-    "<p style=" + "font-weight:bold;" + ">Press Y if the word was shown on the previous screen</p>" +
-    "<p style=" + "font-weight:bold;" + ">Press N if the word was NOT shown on the previous screen</p>" +
-    "<p>Click the button below to begin with some practice rounds</p>"
+    pages: ["<p>Today’s training will consist of several trials. Please keep your fingers positioned over the “Y” and “N” keys throughout each trial.</p>" +
+    "<p>On each trial, you will be presented with two word-lists, one printed in red and one printed in blue. Each list will contain three words and you must memorize all six words.</p>" +
+    "<p>After a short delay you will then be presented with either a red frame or a blue frame, indicating which word-list is relevant for this trial. A red frame means only the words in red are relevant for this trial. A blue frame means only the words in blue are relevant for this trial. You should remember the relevant words and forget the others.</p>" +
+    "<p>You will then be presented with a single word within the coloured frame. </p>" +
+    "<p style=" + "font-weight:bold;" + ">Press Y if the word was in the relevant word-list</p>" +
+    "<p style=" + "font-weight:bold;" + ">Press N if the word was NOT in the relevant word-list</p>" +
+    "<p>We will begin with some practice trials</p>"
     ],
     allow_keys: false,
     show_clickable_nav: true
@@ -31,22 +43,19 @@
 
       timeline.push(instructions);
 
-    /* instructions repeated at end of practice round*/
+//practice rounds
+var exp_stage = 'practice';
+var practiceLength = 6;
 
-  var endPractice = {
-    type: 'endPractice',
-    pages: ["<p>You have completed the practice rounds.  You will be presented with three red words and three blue words.  You will then see a red or blue box.</p>" +
-    "<p style=" + "font-weight:bold;" + ">Press Y if the word was shown on the previous screen</p>" +
-    "<p style=" + "font-weight:bold;" + ">Press N if the word was NOT shown on the previous screen</p>" +
-    "<p>Click the button below to begin</p>"
-    ],
-    allow_keys: false,
-    show_clickable_nav: true
-  };
-
+for (i = 0; i < (practiceLength-1); i++) {
+	timeline.push(fixation);
+	timeline.push(learningScreen);
+	timeline.push(cue);
+	timeline.push(probe);
+}
 
 //present fixation cross for 500ms
-var fixation = {
+    var fixation = {
     type: 'single-stim',
     stimulus: "/study_assets/MSJH/img/fixation.png",
     timing_post_trial: 0,
@@ -55,8 +64,6 @@ var fixation = {
     response_ends_trial: false
 };
 
-
-timeline.push(fixation);
 
 	var learningScreen = {
     type: 'single-stim',
@@ -113,8 +120,6 @@ timeline.push(fixation);
     response_ends_trial: false
 };
 
-timeline.push(learningScreen);
-
 var cue = {
     type: 'single-stim',
     stimulus: function() {
@@ -165,12 +170,14 @@ if (currentTrial === "Mixed"){
     }
 }
 // Return the result
-return "<div class=" + cueColor + ">" + cueLabel + " " + currentTrial + " " + cueRandomColor.toString() + "</div>";
+return "<div class=" + cueColor + "></div>";
 },
-is_html: true
+is_html: true,
+timing_post_trial: 0,
+timing_stim: 1000,
+timing_response: 1000,
+response_ends_trial: false
 };
-
-timeline.push(cue)
 
 /* Start of ProbeLogic.js code */
 
@@ -187,6 +194,8 @@ var probe = {
         var probeArray = ["oldPositiveWords", "oldNegativeWords", "newPositiveWords", "newNegativeWords"];
         var probeCategory;
         var completeTrial;
+        var current_trial = 0;
+        var correct;
 
         if (cueLabel === "random"){
 
@@ -242,35 +251,72 @@ var probe = {
 
         if (cueLabel === "negRel"){
             if (probeCategory === "oldNegativeWords"){
-                completeTrial = "Relevant";
+                completeTrial = "Relevant",
+                correct_response = 89;
             } else if (probeCategory === "oldPositiveWords") {
-                completeTrial = "Irrelevant";
+                completeTrial = "Irrelevant",
+                correct_response = 78;
             } else {
-                completeTrial = probeCategory;
+                completeTrial = probeCategory,
+                correct_response = 78;
             }
         } else if (cueLabel === "posRel"){
             if (probeCategory === "oldPositiveWords"){
-                completeTrial = "Relevant";
+                completeTrial = "Relevant",
+                correct_response = 89;
             } else if (probeCategory === "oldNegativeWords") {
-                completeTrial = "Irrelevant";
+                completeTrial = "Irrelevant",
+                correct_response = 78;
             } else {
-                completeTrial = probeCategory;
+                completeTrial = probeCategory,
+                correct_response = 78;
             }
         } else {
             completeTrial = "nonCritical";
         }
 
+    current_trial = current_trial + 1
+
         console.log("completeTrial =" + completeTrial);
         console.log("word=" + word[0]);
         console.log("answer=" + answer);
-        return "<div>" + answer + "</div>";
-    },
-    is_html: true
-    };
-
-timeline.push(probe);
+        return "<div class=" + cueColor + ">" + answer + "</div>";
+},
+is_html: true,
+choices: [89,78],
+on_finish: function(trial_data){
+if (trial_data.key_press === correct_response) {
+    correct = "true";
+} else {
+    correct = "false";
+    }
+jsPsych.data.addDataToLastTrial({
+		correct: correct,
+		probe_shown: answer,
+		probe_type: probeCategory,
+        trial_type: completeTrial,
+		trial_num: current_trial,
+		correct_response: correct,
+		exp_stage: exp_stage
+     })
+}
 
 /* End of ProbeLogic.js code */
+
+    /* instructions repeated at end of practice round*/
+
+  var endPractice = {
+    type: 'instructions',
+    pages: ["<p>You have completed the practice rounds.  We will now begin the full training session.</p>" +
+    "<p>Click the button below to begin</p>"
+    ],
+    allow_keys: false,
+    show_clickable_nav: true
+  }
+
+timeline.push(endPractice);
+
+
 
 /* round 1 title text */
 var round1 = {
