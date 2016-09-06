@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>MSJH</title>
+      <script src="/assets/javascripts/jatos.js"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
       <script src="G:/Users/Alex/Documents/Becky/DClin/thesis/materials/mST/jspsych-5.0.3/jspsych.js"></script>
 	  <script src="G:/Users/Alex/Documents/Becky/DClin/thesis/materials/mST/jspsych-5.0.3/plugins/jspsych-text.js"></script>
@@ -402,11 +403,16 @@ var endTraining = {
 
  timeline.push(endTraining);
 
-jsPsych.init({
-  timeline: timeline,
-    on_finish: function() {
-      jsPsych.data.displayData('json');
+jatos.onLoad(function() {
+    jsPsych.init({
+        timeline: timeline,
+
+        //Once it has finished send the result data back to Jatos
+        on_finish: function() {
+            var resultJson = JSON.stringify(jsPsych.data.getData());
+            jatos.submitResultData(resultJson, jatos.startNextComponent);
     }
   });
+}
 </script>
 </html>
