@@ -2,14 +2,14 @@
 <html>
   <head>
     <title>MSJH</title>
-      <script src="/assets/javascripts/jatos.js"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-      <script src="/study_assets/MSJH/jspsych-5.0.3/jspsych.js"></script>
-	  <script src="/study_assets/MSJH/jspsych-5.0.3/plugins/jspsych-text.js"></script>
-      <script src="/study_assets/MSJH/jspsych-5.0.3/plugins/jspsych-instructions.js"></script>
-      <script src="/study_assets/MSJH/jspsych-5.0.3/plugins/jspsych-survey-text.js"></script>
-	  <script src="/study_assets/MSJH/jspsych-5.0.3/plugins/jspsych-single-stim.js"></script>
-	  <link href="/study_assets/MSJH/jspsych-5.0.3/css/jspsych.css" rel="stylesheet" type="text/css"></link>
+      <script src="G:/Users/Alex/Documents/Becky/DClin/thesis/materials/mST/jspsych-5.0.3/jspsych.js"></script>
+	  <script src="G:/Users/Alex/Documents/Becky/DClin/thesis/materials/mST/jspsych-5.0.3/plugins/jspsych-text.js"></script>
+      <script src="G:/Users/Alex/Documents/Becky/DClin/thesis/materials/mST/jspsych-5.0.3/plugins/jspsych-instructions.js"></script>
+      <script src="G:/Users/Alex/Documents/Becky/DClin/thesis/materials/mST/jspsych-5.0.3/plugins/jspsych-survey-text.js"></script>
+	  <script src="G:/Users/Alex/Documents/Becky/DClin/thesis/materials/mST/jspsych-5.0.3/plugins/jspsych-single-stim.js"></script>
+	  <script src="G:/Users/Alex/Documents/Becky/DClin/thesis/materials/mST/jspsych-5.0.3/plugins/jspsych-multi-stim-multi-response.js"></script>
+	  <link href="G:/Users/Alex/Documents/Becky/DClin/thesis/materials/mST/jspsych-5.0.3/css/jspsych.css" rel="stylesheet" type="text/css"></link>
   </head>
   <body>
   <script>
@@ -49,7 +49,7 @@ var exp_stage = 'practice';
 //present fixation cross for 500ms
     var fixation = {
     type: 'single-stim',
-    stimulus: "/study_assets/MSJH/img/fixation.png",
+    stimulus: "G:/Users/Alex/Documents/Becky/DClin/thesis/materials/mST/img/fixation.png",
     timing_post_trial: 0,
 	timing_stim: 500,
 	timing_response: 500,
@@ -187,7 +187,7 @@ var probe = {
         var probeCategory;
         var completeTrial;
         var current_trial = 0;
-        var correct_response;
+        var correctResponse;
 
         if (cueLabel === "random"){
 
@@ -244,48 +244,52 @@ var probe = {
         if (cueLabel === "negRel"){
             if (probeCategory === "oldNegativeWords"){
                 completeTrial = "Relevant",
-                correct_response = 89;
+                correctResponse = 89;
             } else if (probeCategory === "oldPositiveWords") {
                 completeTrial = "Irrelevant",
-                correct_response = 78;
+                correctResponse = 78;
             } else {
                 completeTrial = probeCategory,
-                correct_response = 78};
+                correctResponse = 78};
         } else if (cueLabel === "posRel"){
             if (probeCategory === "oldPositiveWords"){
                 completeTrial = "Relevant",
-                correct_response = 89;
+                correctResponse = 89;
             } else if (probeCategory === "oldNegativeWords") {
                 completeTrial = "Irrelevant",
-                correct_response = 78;
+                correctResponse = 78;
             } else {
                 completeTrial = probeCategory,
                 correct_response = 78;
             }
         } else {
             completeTrial = "nonCritical",
-                correct_response = [89,78];
+                correctResponse = 78;
         }
 
         //trying to record what correct response was for each trial
-       jsPsych.data.addDataToLastTrial({correct_response: correct_response});
-
-        current_trial = current_trial + 1
+		jsPsych.data.addDataToLastTrial({correctResponse: correctResponse})
 
         console.log("completeTrial =" + completeTrial);
         console.log("word=" + word[0]);
         console.log("answer=" + answer);
-        console.log("correct_response=" + correct_response);
+        console.log("correctResponse=" + correctResponse);
         return "<div class=" + cueColor + ">" + answer + "</div>";
 },
 is_html: true,
 choices: [89,78]
 }
 
-
+/*var trial = {
+    type: 'multi-stim-multi-response',
+    stimuli: ["G:/Users/Alex/Documents/Becky/DClin/thesis/materials/mST/img/fixation.png", learningScreen, cue, probe],
+	is_html: true,
+    choices: [[89,78]],
+    timing_stim: [500,1000, 1000, -1]
+}*/
 /* End of ProbeLogic.js code */
 
-var practiceLength = 6;
+var practiceLength = 2;
 
 for (i = 0; i < (practiceLength-1); i++) {
 	timeline.push(fixation);
@@ -293,8 +297,6 @@ for (i = 0; i < (practiceLength-1); i++) {
 	timeline.push(cue);
 	timeline.push(probe);
 }
-
-    /* instructions repeated at end of practice round*/
 
   var endPractice = {
     type: 'instructions',
@@ -307,58 +309,104 @@ for (i = 0; i < (practiceLength-1); i++) {
 
 timeline.push(endPractice);
 
+var roundOne = {
+	type: 'single-stim',
+	stimulus: "G:/Users/Alex/Documents/Becky/DClin/thesis/materials/mST/img/roundOne.png",
+	timing_post_trial: 1000,
+	timing_stim: 2000,
+	timing_response: 2000,
+    response_ends_trial: false
+	}
 
+timeline.push(roundOne);
 
-/* round 1 title text */
-var round1 = {
-    type: 'round1',
-    pages: ["<p>Round 1</p>"
+var roundOneLength = 3;
+
+for (i = 0; i < (roundOneLength-1); i++) {
+	timeline.push(fixation);
+	timeline.push(learningScreen);
+	timeline.push(cue);
+	timeline.push(probe);
+}
+
+var roundOneEnd = {
+	type: 'instructions',
+    pages: ["<p>End of Round 1. Please take a short break before you begin Round 2</p>" +
+    "<p>Click the button below when you are ready to begin Round 2</p>"
     ],
     allow_keys: false,
-    show_clickable_nav: false
-  };
+    show_clickable_nav: true
+	}
 
-/* round 2 title text */
-var round2 = {
-    type: 'round2',
-    pages: ["<p>Round 2</p>"
+timeline.push(roundOneEnd);
+
+var roundTwo = {
+	type: 'single-stim',
+	stimulus: "G:/Users/Alex/Documents/Becky/DClin/thesis/materials/mST/img/roundTwo.png",
+	timing_post_trial: 1000,
+	timing_stim: 2000,
+	timing_response: 2000,
+    response_ends_trial: false
+	}
+
+timeline.push(roundTwo);
+
+var roundTwoLength = 3;
+
+for (i = 0; i < (roundTwoLength-1); i++) {
+	timeline.push(fixation);
+	timeline.push(learningScreen);
+	timeline.push(cue);
+	timeline.push(probe);
+}
+
+var roundTwoEnd = {
+	type: 'instructions',
+    pages: ["<p>End of Round 2. Please take a short break before you begin Round 3</p>" +
+    "<p>Click the button below when you are ready to begin Round 3</p>"
     ],
     allow_keys: false,
-    show_clickable_nav: false
-  };
+    show_clickable_nav: true
+	}
 
-/* round 3 title text */
-var round3 = {
-    type: 'round3',
-    pages: ["<p>Round 3</p>"
+timeline.push(roundTwoEnd);
+
+var roundThree = {
+	type: 'single-stim',
+	stimulus: "G:/Users/Alex/Documents/Becky/DClin/thesis/materials/mST/img/roundThree.png",
+	timing_post_trial: 1000,
+	timing_stim: 2000,
+	timing_response: 2000,
+    response_ends_trial: false
+	}
+
+timeline.push(roundThree);
+
+var roundThreeLength = 3;
+
+for (i = 0; i < (roundThreeLength-1); i++) {
+	timeline.push(fixation);
+	timeline.push(learningScreen);
+	timeline.push(cue);
+	timeline.push(probe);
+}
+
+var endTraining = {
+    type: 'instructions',
+    pages: ["<p>Thank you! You have now completed today's training.</p>" +
+    "<p>Please click the button below to end this session and log your data</p>"
     ],
     allow_keys: false,
-    show_clickable_nav: false
-  };
+    show_clickable_nav: true
+  }
 
+ timeline.push(endTraining);
 
-/* thank you message for completing the trial*/
-var complete = {
-    type: 'complete',
-    pages: ["<p>Thank you for completing today's trial</p>"
-    ],
-    allow_keys: false,
-    show_clickable_nav: false
-  };
-
-
-jatos.onLoad(function() {
-    jsPsych.init({
-        timeline: timeline,
-
-        //Once it has finished send the result data back to Jatos
-        on_finish: function() {
-            var resultJson = JSON.stringify(jsPsych.data.getData());
-            jatos.submitResultData(resultJson, jatos.startNextComponent);
-        }
-    });
-});
-    </script>
-    </body>
+jsPsych.init({
+  timeline: timeline,
+    on_finish: function() {
+      jsPsych.data.displayData('json');
+    }
+  });
+</script>
 </html>
-

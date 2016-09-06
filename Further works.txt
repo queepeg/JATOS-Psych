@@ -5,8 +5,6 @@ After cue is shown, have a slight delay and present probe inside the cue rectang
 
 ************ORDER OF TRIAL EVENTS***************
 
-instructions screen: 
-Trial x5
 
 End practice screen
 Title Screen: Round 1 for 1000ms
