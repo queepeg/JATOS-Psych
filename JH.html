@@ -248,9 +248,13 @@ var probe = {
             } else if (probeCategory === "oldPositiveWords") {
                 completeTrial = "Irrelevant",
                 correctResponse = 78;
-            } else {
-                completeTrial = probeCategory,
-                correctResponse = 78};
+            } else if (probeCategory === "newPositiveWords") {
+                completeTrial = "newPositive",
+                correctResponse = 78;
+            } else if (probeCategory === "newNegativeWords") {
+                completeTrial = "newNegative",
+                correctResponse = 78;
+            }
         } else if (cueLabel === "posRel"){
             if (probeCategory === "oldPositiveWords"){
                 completeTrial = "Relevant",
@@ -258,9 +262,12 @@ var probe = {
             } else if (probeCategory === "oldNegativeWords") {
                 completeTrial = "Irrelevant",
                 correctResponse = 78;
-            } else {
-                completeTrial = probeCategory,
-                correct_response = 78;
+             } else if (probeCategory === "newPositiveWords") {
+                completeTrial = "newPositive",
+                correctResponse = 78;
+            } else if (probeCategory === "newNegativeWords") {
+                completeTrial = "newNegative",
+                correctResponse = 78;
             }
         } else {
             completeTrial = "nonCritical",
