@@ -415,8 +415,11 @@ jatos.onLoad(function() {
 
         //Once it has finished send the result data back to Jatos
         on_finish: function() {
-            var resultJson = JSON.stringify(jsPsych.data.getData());
-            jatos.submitResultData(resultJson, jatos.startNextComponent);
+
+var csvString = jsPsych.data.dataAsCSV();
+jatos.submitResultData(csvString, jatos.endStudy);
+            /*var resultJson = JSON.stringify(jsPsych.data.getData());
+            jatos.submitResultData(resultJson, jatos.startNextComponent);*/
     }
   });
 })
