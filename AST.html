@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+  <head>
+    <title>MSJH</title>
+      <script src="/assets/javascripts/jatos.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+      <script src="/study_assets/MSJH/jspsych-5.0.3/jspsych.js"></script>
+	  <script src="/study_assets/MSJH/jspsych-5.0.3/plugins/jspsych-text.js"></script>
+      <script src="/study_assets/MSJH/jspsych-5.0.3/plugins/jspsych-instructions.js"></script>
+      <script src="/study_assets/MSJH/jspsych-5.0.3/plugins/jspsych-survey-text.js"></script>
+	  <script src="/study_assets/MSJH/jspsych-5.0.3/plugins/jspsych-single-stim.js"></script>
+      <script src="/study_assets/MSJH/jspsych-5.0.3/plugins/jspsych-multi-stim-multi-response.js"></script>
+	  <link href="/study_assets/MSJH/jspsych-5.0.3/css/jspsych.css" rel="stylesheet" type="text/css"></link>
+  </head>
+  <body>
+  <script>
+
+  /* create the experiment timeline */
+  var timeline = [];
+
+  //randomly order probes
+  var probeArray = ["/study_assets_root/MSJH/img/emotion.png","/study_assets_root/MSJH/img/gender.png","/study_assets_root/MSJH/img/color.png"];
+  var shuffledArray = jsPsych.randomization.shuffle(probeArray);
+
+  //randomly select picture compund
+  var compoundArray = ["/study_assets_root/MSJH/img/1.png","/study_assets_root/MSJH/img/2.png","/study_assets_root/MSJH/img/3.png","/study_assets_root/MSJH/img/4.png","/study_assets_root/MSJH/img/5.png","/study_assets_root/MSJH/img/6.png","/study_assets_root/MSJH/img/7.png","/study_assets_root/MSJH/img/8.png","/study_assets_root/MSJH/img/9.png","/study_assets_root/MSJH/img/10.png","/study_assets_root/MSJH/img/11.png","/study_assets_root/MSJH/img/12.png","/study_assets_root/MSJH/img/13.png","/study_assets_root/MSJH/img/14.png","/study_assets_root/MSJH/img/15.png","/study_assets_root/MSJH/img/16.png","/study_assets_root/MSJH/img/17.png","/study_assets_root/MSJH/img/18.png","/study_assets_root/MSJH/img/19.png","/study_assets_root/MSJH/img/20.png","/study_assets_root/MSJH/img/21.png","/study_assets_root/MSJH/img/22.png","/study_assets_root/MSJH/img/23.png","/study_assets_root/MSJH/img/24.png","/study_assets_root/MSJH/img/25.png","/study_assets_root/MSJH/img/26.png","/study_assets_root/MSJH/img/27.png","/study_assets_root/MSJH/img/28.png","/study_assets_root/MSJH/img/29.png","/study_assets_root/MSJH/img/30.png","/study_assets_root/MSJH/img/31.png","/study_assets_root/MSJH/img/32.png","/study_assets_root/MSJH/img/33.png","/study_assets_root/MSJH/img/34.png","/study_assets_root/MSJH/img/35.png","/study_assets_root/MSJH/img/36.png","/study_assets_root/MSJH/img/37.png","/study_assets_root/MSJH/img/38.png","/study_assets_root/MSJH/img/39.png","/study_assets_root/MSJH/img/40.png","/study_assets_root/MSJH/img/41.png","/study_assets_root/MSJH/img/42.png","/study_assets_root/MSJH/img/43.png","/study_assets_root/MSJH/img/44.png","/study_assets_root/MSJH/img/45.png","/study_assets_root/MSJH/img/46.png","/study_assets_root/MSJH/img/47.png","/study_assets_root/MSJH/img/48.png"];
+var compoundChoice = jsPsych.randomization.sample(compoundArray, 1, false);
+
+  //programme pseudo-random trial order for first block
+  var blockOne = {
+  type: 'multi-stim-multi-response',
+  is_html: true,
+  timing_stim: [500,-1],
+  choices: [81,90,80,77],
+  timeline: [
+      {stimulus: [shuffledArray[0], compoundChoice]},
+      {stimulus: [shuffledArray[0], compoundChoice]},
+      {stimulus: [shuffledArray[0], compoundChoice]},
+      {stimulus: [shuffledArray[1], compoundChoice]},
+      ]
+
+  }
+
+
+  jatos.onLoad(function() {
+    jsPsych.init({
+        timeline: timeline,
+
+        //Once it has finished send the result data back to Jatos
+        on_finish: function() {
+
+var csvString = jsPsych.data.dataAsCSV();
+jatos.submitResultData(csvString, jatos.endStudy);
+            /*var resultJson = JSON.stringify(jsPsych.data.getData());
+            jatos.submitResultData(resultJson, jatos.startNextComponent);*/
+    }
+  });
+})
+</script>
+</html>

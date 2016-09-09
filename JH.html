@@ -15,8 +15,28 @@
   <script>
 
   /* create the experiment timeline */
-  var timeline = [];
-  var wordColor;
+var timeline = [];
+var wordColor; //global variable//
+var currentTrial;
+var cueLabel;
+var probeCategory;
+
+// log date
+
+var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth()+1; //January is 0!
+var yyyy = today.getFullYear();
+
+if(dd<10) {
+    dd='0'+dd
+}
+
+if(mm<10) {
+    mm='0'+mm
+}
+
+today = mm+'/'+dd+'/'+yyyy;
 
 // enter participant number
 var survey_pNo = {
@@ -62,8 +82,8 @@ var exp_stage = 'practice';
 	stimulus: function() {
 
 	// Array of words to be used
-	var positiveArray = ["smile","joy","triumph","love","peace"];
-	var negativeArray = ["hate","war","death","decay","violence"];
+	var positiveArray = ["enjoyment","glory","triumph","joke","laughter","flower","champion","honey","star","bath","legend","charm","treat","promotion","christmas","warmth","profit","passion","movie","delight","prestige","virtue","graduate","dancer","kids","wedding","excitement","mountain","bride","gift","ocean","sugar","cash","foam","palace","comedy","talent","joy","queen","restaurant","pride","comfort","heaven","fun","liberty","dollar","employment","humor","mail","vacation","acceptance","trust","gold","grass","lake","vision","sky","taste","snow","garden","beach","travel","victory","baby","pleasure","dream","achievement","honor","dress","wonder","song","beauty","brother","advantage","leader","dog","memory","favor","desire","youth","king","dinner","success","health","agreement","wish","sun","quality","justice","radio","progress","couple","game","respect","truth","spring","freedom","chance","friend","color","moral","letter","knowledge","earth"];
+	var negativeArray = ["slum","infection","scandal","fraud","wounds","shotgun","hurricane","thief","overcast","loneliness","hardship","menace","agony","demon","nightmare","grief","scar","poison","slaughter","tomb","burial","cane","neglect","dentist","bastard","debt","gossip","pity","gloom","insect","penalty","revolver","python","cemetery","misery","contempt","needle","execution","burn","bees","assault","ignorance","rage","tumor","chaos","horror","abuse","fever","flood","murderer","illness","poverty","quarrel","crash","jail","punishment","killer","fault","panic","depression","criminal","devil","cancer","disaster","excuse","injury","victim","pistol","bullet","divorce","slave","funeral","damage","accident","mistake","crime","waste","shadow","destruction","prison","weapon","hate","dirt","snake","mold","anger","tragedy","sin","lie","rifle","danger","evil","knife","crisis","pain","failure","hell","stress","fear","trouble","fall","pressure","cut","death"];
 	var mixedArray = ["red","green","yellow","purple","black", "white", "orange", "pink"];
 
 	// Array of colors to be used and randomised
@@ -107,8 +127,8 @@ var exp_stage = 'practice';
     },
     is_html: true,
     timing_post_trial: 800,
-	timing_stim: 1000,
-	timing_response: 1000,
+	timing_stim: 7800,
+	timing_response: 7800,
     response_ends_trial: false
 };
 
@@ -129,7 +149,7 @@ if (typeof boolNegativePositive === "undefined"){
 //variable to determine probability of cue color drawn by var cue
 var cueRandomColor = Math.floor(Math.random() * 100);
 
-if (currentTrial === "Mixed"){
+if (currentTrial === "Mixedtrue" || currentTrial === "Mixedfalse"){
     // choose randomly between .redCue and .blueCue
     var intCueColor = Math.floor(Math.random() * 100);
 
@@ -181,8 +201,8 @@ var probe = {
         var oldPositiveWords = [stimPArray[0], stimPArray[1], stimPArray[2]];
         var oldNegativeWords = [stimNArray[0], stimNArray[1], stimNArray[2]];
         var oldMixedWords = [stimMArray[0], stimMArray[1], stimMArray[2], stimMArray[3], stimMArray[4], stimMArray[5]];
-        var newPositiveWords = ["fantastic", "awesome", "way to go"];
-        var newNegativeWords = ["poor","unhappy","sad"];
+        var newPositiveWords = ["sapphire","diploma","bunny","cuisine","sailboat","caress","lottery","jewel","penthouse","champ","flirt","butterfly","refreshment","astronaut","waterfall","puppy","valentine","millionaire","riches","casino","nectar","spouse","pizza","hug","dove","bathtub","rainbow","twilight","toy","bouquet","yacht","treasure","kindness","glamour","intellect","kitten","beverage","fireworks","thrill","garment","fragrance","savior","outdoors","ecstasy","idol","blossom","wink","circus","mobility","pet","trophy","diamond","cheer","bless","cake","chocolate","sweetheart","athletics","doll","tune","perfume","sunrise","patriot","rabbit","infant","perfection","reunion","silk","paradise","incentive","computer","grin","abundance","pie","sunset","breeze","fantasy","applause","adventure","daylight","reward","scholar","optimism","ace","excellence","memories","rescue","saint","candy","miracle","nurse","voyage","sunlight","holiday","kiss","angel","affection","fame","birthday","crown","ambition","wit","luxury","melody"];
+        var newNegativeWords = ["dustpan","grime","pus","mutation","scum","scorpion","termite","deserter","toothache","cyclone","guillotine","terrorist","mildew","crutch","stench","germs","scapegoat","blubber","allergy","mosquito","morgue","lawsuit","loser","massacre","slime","invader","abduction","avalanche","snob","addict","dagger","leprosy","trauma","vampire","vandal","tornado","intruder","mucus","trash","idiot","alimony","fungus","beggar","lice","measles","filth","maggot","wasp","madman","smallpox","robber","deceit","spider","traitor","malice","blackmail","venom","cockroach","slap","roach","hostage","blister","stink","dummy","malaria","greed","skull","louse","thorn","grenade","vomit","torture","dump","blasphemy","ache","scorn","pest","jealousy","outrage","obesity","nuisance","headache","shriek","ulcer","handicap","manure","pinch","paralysis","rat","sickness","assassin","surgery","ambulance","discomfort","corpse","lump","carcass","coffin","garbage","beast","insult","despise","riot","coward"];
         var probeArray = ["oldPositiveWords", "oldNegativeWords", "newPositiveWords", "newNegativeWords"];
         var probeCategory;
         var completeTrial;
@@ -269,13 +289,20 @@ var probe = {
                 completeTrial = "newNegative",
                 correctResponse = 78;
             }
-        } else {
+        } else if (cueLabel === "random") {
             completeTrial = "nonCritical",
                 correctResponse = 78;
         }
 
         //trying to record what correct response was for each trial
 		jsPsych.data.addDataToLastTrial({correctResponse: correctResponse})
+        jsPsych.data.addDataToLastTrial({currentTrial: currentTrial})
+        jsPsych.data.addDataToLastTrial({cueType: cueLabel})
+        jsPsych.data.addDataToLastTrial({probeCategory: probeCategory})
+        jsPsych.data.addDataToLastTrial({trialType: completeTrial})
+
+
+
 
         console.log("completeTrial =" + completeTrial);
         console.log("word=" + word[0]);
@@ -296,7 +323,7 @@ choices: [89,78]
 }*/
 /* End of ProbeLogic.js code */
 
-var practiceLength = 2;
+var practiceLength = 6;
 
 for (i = 0; i < (practiceLength-1); i++) {
 	timeline.push(fixation);
@@ -327,7 +354,7 @@ var roundOne = {
 
 timeline.push(roundOne);
 
-var roundOneLength = 3;
+var roundOneLength = 41;
 
 for (i = 0; i < (roundOneLength-1); i++) {
 	timeline.push(fixation);
@@ -358,7 +385,7 @@ var roundTwo = {
 
 timeline.push(roundTwo);
 
-var roundTwoLength = 3;
+var roundTwoLength = 41;
 
 for (i = 0; i < (roundTwoLength-1); i++) {
 	timeline.push(fixation);
@@ -389,7 +416,7 @@ var roundThree = {
 
 timeline.push(roundThree);
 
-var roundThreeLength = 3;
+var roundThreeLength = 41;
 
 for (i = 0; i < (roundThreeLength-1); i++) {
 	timeline.push(fixation);
@@ -409,9 +436,13 @@ var endTraining = {
 
  timeline.push(endTraining);
 
+jsPsych.data.addProperties({subject: survey_pNo});
+jsPsych.data.addProperties({subject: today});
+
 jatos.onLoad(function() {
     jsPsych.init({
         timeline: timeline,
+        fullscreen: true,
 
         //Once it has finished send the result data back to Jatos
         on_finish: function() {

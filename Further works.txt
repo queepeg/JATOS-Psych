@@ -1,40 +1,6 @@
-Populate probe arrays
-
-After cue is shown, have a slight delay and present probe inside the cue rectangle.....
 
 
-************ORDER OF TRIAL EVENTS***************
+Tidy up css
 
-
-End practice screen
-Title Screen: Round 1 for 1000ms
-Display 40 x Trial
-
-Title Screen: Round 2 for 1000ms
-Display 40 x Trial
-
-Title Screen: Round 3 for 1000ms
-Display 40 x Trial
-
-Completion Screen for 3000ms
-
-************ORDER OF TRIAL EVENTS***************
-
-Results we need to record:
-- Date (should already be on results file)
-- Participant ID
-- Trial number
-- var completeTrial 
-- var correctResponse
-- User's actual response (Y or N)
-- Reaction Time between probe and keystroke
-
-
-THINGS WE CAN STEAL
-
-This might be useful for timeline array: http://docs.jspsych.org/tutorials/rt-task/
-
-VERY USEFUL for timeline logic and trial tracking:
-https://github.com/expfactory/expfactory-experiments/blob/master/directed_forgetting/experiment.js
-
+Load to server
 
