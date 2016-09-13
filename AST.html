@@ -10,7 +10,7 @@
       <script src="/study_assets/AST/jspsych-5.0.3/plugins/jspsych-survey-text.js"></script>
 	  <script src="/study_assets/AST/jspsych-5.0.3/plugins/jspsych-single-stim.js"></script>
       <script src="/study_assets/AST/jspsych-5.0.3/plugins/jspsych-multi-stim-multi-response.js"></script>
-	  <link href="/study_assets/AST/jspsych-5.0.3/css/jspsych.css" rel="stylesheet" type="text/css"></link>
+	  <link href="/study_assets/AST/jspsych-5.0.3/css/jspsych2.css" rel="stylesheet" type="text/css"></link>
   </head>
   <body>
   <script>
@@ -24,12 +24,139 @@
       console.log("cueA =" + cueOrder[0]);
       console.log("cueB =" + cueOrder[1]);
       console.log("cueC =" + cueOrder[2]);
+  var cueOrder2 = jsPsych.randomization.shuffle(cueArray);
+      console.log("cueA =" + cueOrder2[0]);
+      console.log("cueB =" + cueOrder2[1]);
+      console.log("cueC =" + cueOrder2[2]);
 
 //define probe array
   var probeArray = ["/study_assets/AST/img/1.png","/study_assets/AST/img/2.png","/study_assets/AST/img/3.png","/study_assets/AST/img/4.png","/study_assets/AST/img/5.png","/study_assets/AST/img/6.png","/study_assets/AST/img/7.png","/study_assets/AST/img/8.png","/study_assets/AST/img/9.png","/study_assets/AST/img/10.png","/study_assets/AST/img/11.png","/study_assets/AST/img/12.png","/study_assets/AST/img/13.png","/study_assets/AST/img/14.png","/study_assets/AST/img/15.png","/study_assets/AST/img/16.png","/study_assets/AST/img/17.png","/study_assets/AST/img/18.png","/study_assets/AST/img/19.png","/study_assets/AST/img/20.png","/study_assets/AST/img/21.png","/study_assets/AST/img/22.png","/study_assets/AST/img/23.png","/study_assets/AST/img/24.png","/study_assets/AST/img/25.png","/study_assets/AST/img/26.png","/study_assets/AST/img/27.png","/study_assets/AST/img/28.png","/study_assets/AST/img/29.png","/study_assets/AST/img/30.png","/study_assets/AST/img/31.png","/study_assets/AST/img/32.png","/study_assets/AST/img/33.png","/study_assets/AST/img/34.png","/study_assets/AST/img/35.png","/study_assets/AST/img/36.png","/study_assets/AST/img/37.png","/study_assets/AST/img/38.png","/study_assets/AST/img/39.png","/study_assets/AST/img/40.png","/study_assets/AST/img/41.png","/study_assets/AST/img/42.png","/study_assets/AST/img/43.png","/study_assets/AST/img/44.png","/study_assets/AST/img/45.png","/study_assets/AST/img/46.png","/study_assets/AST/img/47.png","/study_assets/AST/img/48.png",];
+var probeOrder = jsPsych.randomization.shuffle(probeArray);
+var probeOrder2 =jsPsych.randomization.shuffle(probeArray);
+
+// enter participant number
+var survey_pNo = {
+  type: 'survey-text',
+  questions: ["Please enter your participant number"],
+};
+
+      timeline.push(survey_pNo);
+
+  /* instructions and practice text */
+  var instructions = {
+    type: 'instructions',
+    pages: ["<p>During this task you will asked to spot the odd-one-out from an array of four faces.  At the start of each trial, you will be shown one of three words, indicating which feature you should use to make your judgement.</p>" +
+    "<p>EMOTION means you need to spot which face shows a different emotion than all the others (happy or angry)</p>" +
+    "<p>GENDER means you need to spot which face is a different gender than all the others (male or female)</p>" +
+    "<p>And COLOR means you need to spot which face is presented in a different shade of grey than the others (light or dark grey)</p>" +
+    "<p>You will then be shown the array of faces and should make your decision as quickly and accurately as possible.  You will use your keypad to make your choice so please position your thums and forefingers over the “Q”, “Z”, “P”, and “M” keys throughout the task.  These keys correspond with the position of each face so you should:</p>" +
+    "<p style=" + "font-weight:bold;" + ">Press Q if the top left image is the odd-one-out </p>" +
+    "<p style=" + "font-weight:bold;" + ">Press P if the top right image is the odd-one out</p>" +
+    "<p style=" + "font-weight:bold;" + ">Press Z if the bottom left image is the odd-one-out</p>" +
+    "<p style=" + "font-weight:bold;" + ">Press M if the bottom right image is the odd one out</p>" +
+    "<p>We will begin with some practice trials</p>"
+    ],
+    allow_keys: false,
+    show_clickable_nav: true
+  };
+
+      timeline.push(instructions);
 
   //present stimuli
   var practiceTrial = {
+      type: 'multi-stim-multi-response',
+      choices: [[81,90,80,77]],
+      timing_stim: [500,-1],
+      timing_response: [500,-1],
+      response_ends_trial: [false,true],
+      timeline: [
+          {stimuli: [function () {
+                var cue = cueOrder[0];
+                return cue;},
+            function () {
+                var probe = probeOrder[0];
+                return probe;},
+          {data: { cue: cueOrder[0],
+                 probe: probeOrder[0]} }
+           ]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[1];
+                return cue;},
+            function () {
+                var probe = probeOrder[1];
+                return probe;},
+          {data: { cue: cueOrder[1],
+                 probe: probeOrder[1]} }
+           ]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[2];
+                return cue;},
+            function () {
+                var probe = probeOrder[2];
+                return probe;},
+          {data: { cue: cueOrder[2],
+                 probe: probeOrder[2]} }
+           ]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[1];
+                return cue;},
+            function () {
+                var probe = probeOrder[3];
+                return probe;},
+          {data: { cue: cueOrder[1],
+                 probe: probeOrder[3]} }
+           ]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[1];
+                return cue;},
+            function () {
+                var probe = probeOrder[4];
+                return probe;},
+          {data: { cue: cueOrder[1],
+                 probe: probeOrder[4]} }
+           ]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[0];
+                return cue;},
+            function () {
+                var probe = probeOrder[5];
+                return probe;},
+          {data: { cue: cueOrder[0],
+                 probe: probeOrder[5]} }
+           ]
+            }
+      ]
+  };
+      timeline.push(practiceTrial);
+
+var endPractice = {
+    type: 'instructions',
+    pages: ["<p>You have completed the practice rounds.  We will now begin the experimental trials.</p>" +
+    "<p>Click the button below to begin</p>"
+    ],
+    allow_keys: false,
+    show_clickable_nav: true
+  }
+
+timeline.push(endPractice);
+
+/*var roundOne = {
+	type: 'single-stim',
+	stimulus: "/study_assets/AST/img/roundOne.png",
+	timing_post_trial: 1000,
+	timing_stim: 2000,
+	timing_response: 2000,
+    response_ends_trial: false
+	}
+
+timeline.push(roundOne);
+
+var firstBlock = {
       type: 'multi-stim-multi-response',
       choices: [[81,90,80,77]],
       timing_stim: [500,-1],
@@ -78,22 +205,1555 @@
                 var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
                 return probeChoice;}]
           },
+          {stimuli: [function () {
+                var cue = cueOrder[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },{stimuli: [function () {
+                var cue = cueOrder[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },{stimuli: [function () {
+                var cue = cueOrder[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },{stimuli: [function () {
+                var cue = cueOrder[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+
       ]
 
   };
 
-      timeline.push(practiceTrial);
+      timeline.push(firstBlock);
 
-var endPractice = {
+      var roundOneEnd = {
+	type: 'instructions',
+    pages: ["<p>End of Round 1. Please take a short break before you begin Round 2</p>" +
+    "<p>Click the button below when you are ready to begin Round 2</p>"
+    ],
+    allow_keys: false,
+    show_clickable_nav: true
+	}
+
+timeline.push(roundOneEnd);
+
+var roundTwo = {
+	type: 'single-stim',
+	stimulus: "/study_assets/AST/img/roundTwo.png",
+	timing_post_trial: 1000,
+	timing_stim: 2000,
+	timing_response: 2000,
+    response_ends_trial: false
+	}
+
+timeline.push(roundTwo);
+
+ var secondBlock = {
+      type: 'multi-stim-multi-response',
+      choices: [[81,90,80,77]],
+      timing_stim: [500,-1],
+      timing_response: [500,-1],
+      response_ends_trial: [false,true],
+      timeline: [
+          {stimuli: [function () {
+                var cue = cueOrder2[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },{stimuli: [function () {
+                var cue = cueOrder2[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },{stimuli: [function () {
+                var cue = cueOrder2[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },{stimuli: [function () {
+                var cue = cueOrder2[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[1];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[0];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+          {stimuli: [function () {
+                var cue = cueOrder2[2];
+                return cue;},
+            function () {
+                var probeChoice = jsPsych.randomization.sample(probeArray, 1, false);
+                return probeChoice;}]
+          },
+
+      ]
+
+  };
+
+      timeline.push(secondBlock);
+
+var endTask = {
     type: 'instructions',
-    pages: ["<p>You have completed the practice rounds.  We will now begin the full training session.</p>" +
-    "<p>Click the button below to begin</p>"
+    pages: ["<p>Thank you! You have now completed this task.</p>" +
+    "<p>Please click the button below to end this session and log your data</p>"
     ],
     allow_keys: false,
     show_clickable_nav: true
   }
 
-timeline.push(endPractice);
+ timeline.push(endTask);
+
+ jsPsych.data.addProperties({subject: survey_pNo});*/
+
+
   jatos.onLoad(function() {
     jsPsych.init({
         timeline: timeline,

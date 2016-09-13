@@ -69,7 +69,7 @@ var exp_stage = 'practice';
 //present fixation cross for 500ms
     var fixation = {
     type: 'single-stim',
-    stimulus: "/study_assets/MSJH/img/fixation.png",
+    stimulus: '/study_assets/MSJH/img/fixation.png',
     timing_post_trial: 0,
 	timing_stim: 500,
 	timing_response: 500,
@@ -308,7 +308,7 @@ var probe = {
         console.log("word=" + word[0]);
         console.log("answer=" + answer);
         console.log("correctResponse=" + correctResponse);
-        return "<div class=" + cueColor + ">" + answer + "</div>";
+        return "<div class=" + cueColor + "><div class=center-content>" + answer + "</div></div>";
 },
 is_html: true,
 choices: [89,78]
